@@ -1,3 +1,9 @@
+## 5.0.7 (2024-11-17)
+
+### Fix
+
+- **build-and-release.yml**: tag issues
+
 ## 5.0.6 (2024-11-17)
 
 ### Fix
