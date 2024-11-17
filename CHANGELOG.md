@@ -1,3 +1,9 @@
+## 5.0.1 (2024-11-17)
+
+### Fix
+
+- **build-and-release.yml**: issues with job process
+
 ## 5.0.0 (2024-11-17)
 
 ### BREAKING CHANGE
