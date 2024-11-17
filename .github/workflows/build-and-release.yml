@@ -32,7 +32,7 @@ jobs:
         # This will get the latest tag (the version bumped in bump.yml)
 
       - name: Run build script
-        run: build.sh
+        run: bash ./build.sh
 
       - name: Upload artifact
         uses: actions/upload-artifact@v3
