@@ -10,7 +10,11 @@ _A simple interactive cli tool for scheduling a shutdown on Windows_
 
 </div>
 
+#
+
 ShutdownX is a Windows tool that allows you to schedule automatic shutdowns using a simple interface. You can schedule the shutdown based on a specific time or set a timer for the duration.
+
+![Showcase](img/showcase.gif)
 
 ## ⚙️ Requirements
 

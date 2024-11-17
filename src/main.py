@@ -5,6 +5,7 @@ The main module for the ShutdownX CLI tool.
 import platform
 import subprocess
 import argparse
+import traceback
 from datetime import datetime, timedelta
 import inquirer
 from rich.console import Console
@@ -21,8 +22,17 @@ def handle_shutdown(seconds_time, preview_time):
             default=False
         )
         if confirm:
-            subprocess.run(["shutdown", "-s", "-f", "-t", str(seconds_time)], check=True)
-            console.print("[bold green]Shutdown has now been scheduled[/bold green]")
+            result = subprocess.run(["shutdown", "-s", "-f", "-t",
+                str(seconds_time)],
+                capture_output=True,
+                text=True,
+                check=False
+            )
+
+            if result.stderr:
+                console.print(f"[bold red]Error:[/bold red] {result.stderr}")
+            else:
+                console.print("[bold green]Shutdown has now been scheduled[/bold green]")
         else:
             console.print("[bold red]Shutdown canceled.[/bold red]")
     except KeyboardInterrupt:
@@ -37,9 +47,9 @@ def interactive_mode():
                     "mode",
                     message="How would you like to schedule the shutdown?",
                     choices=[
-                        ("Specific Time - Schedule a shutdown at an exact time", "time"),
-                        ("Duration Timer - Schedule a shutdown after a set duration", "duration"),
-                        ("Remove Scheduled Shutdown", "remove"),
+                        ("Specific Time \t - Schedule a shutdown at an exact time", "time"),
+                        ("Duration Timer \t - Schedule a shutdown after a set duration", "duration"),
+                        ("Remove Schedule \t - Remove the scheduled shutdown", "remove"),
                         ("Exit", "exit")
                     ]
                 )
@@ -51,14 +61,14 @@ def interactive_mode():
                 break
 
             if mode_answer == "remove":
-                result = subprocess.run(["shutdown", "-a"], capture_output=True, text=True, check=True)
-
-                if result.stdout:
-                    console.print("[bold green]Shutdown has been removed.[/bold green]")
+                result = subprocess.run(["shutdown", "-a"], capture_output=True, text=True, check=False)
 
                 if result.stderr:
                     console.print(f"[bold red]Error:[/bold red] {result.stderr}")
-                continue
+                    continue
+
+                console.print("[bold green]Shutdown has been removed.[/bold green]")
+                break
 
             if mode_answer == "time":
                 while True:
@@ -135,5 +145,7 @@ if __name__ == "__main__":
 
     except KeyboardInterrupt:
         console.print("\n[bold red]Script aborted by user.[/bold red]")
+    except TypeError:
+        pass
     except Exception as e:
-        console.print(f"[bold red]Error:[/bold red] {e}")
+        traceback.print_exc()
