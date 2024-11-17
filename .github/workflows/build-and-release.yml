@@ -48,4 +48,5 @@ jobs:
           body: |
             This release contains the latest build of ShutdownX.
             Download the `.exe` file below.
+          artifacts: dist/shutdownx.exe
           token: ${{ secrets.GITHUB_TOKEN }} # GitHub token to create the release
