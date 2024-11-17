@@ -1,3 +1,9 @@
+## 5.0.5 (2024-11-17)
+
+### Fix
+
+- **build-and-release.yml**: github workflow release process
+
 ## 5.0.4 (2024-11-17)
 
 ### Fix
