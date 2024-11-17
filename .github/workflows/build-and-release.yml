@@ -24,12 +24,6 @@ jobs:
           pip install pyinstaller
           pip install commitizen
 
-      - name: Run Commitizen bump
-        id: bump_version # ID to retrieve the version
-        run: cz bump --yes --files-only --force
-        env:
-          CZ_BUMP_TAG_FORMAT: ${{ secrets.CZ_BUMP_TAG_FORMAT }}
-
       - name: Get the new version
         run: echo "VERSION=$(cz version)" >> $GITHUB_ENV
 

@@ -1,3 +1,13 @@
+## 4.0.0 (2024-11-17)
+
+### BREAKING CHANGE
+
+- Committed by Robin Johannesson.
+
+### Fix
+
+- **build-and-release.yml**: fixed some issues
+
 ## 3.0.0 (2024-11-17)
 
 ### BREAKING CHANGE
