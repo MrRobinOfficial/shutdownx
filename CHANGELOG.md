@@ -1,3 +1,9 @@
+## 5.0.10 (2024-11-17)
+
+### Fix
+
+- **build-and-release.yml**: issues with github tags
+
 ## 5.0.9 (2024-11-17)
 
 ### Fix
