@@ -9,7 +9,6 @@ on:
 jobs:
   build_and_release:
     runs-on: ubuntu-latest
-    needs: bump_version # Make sure this depends on the bump version workflow completing
 
     steps:
       - name: Checkout repository
