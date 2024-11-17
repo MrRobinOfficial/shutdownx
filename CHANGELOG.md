@@ -1,3 +1,9 @@
+## 5.0.4 (2024-11-17)
+
+### Fix
+
+- **build-and-release.yml**: fixed bash script
+
 ## 5.0.3 (2024-11-17)
 
 ### Fix
