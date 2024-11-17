@@ -28,9 +28,10 @@ jobs:
           pip install commitizen
           pip install pyinstaller
 
-      - name: Get the new version from the bumped tag
-        run: echo "VERSION=$(git tag -l | sort -V | tail -n 1)" >> $GITHUB_ENV
-        # This will get the latest tag (the version bumped in bump.yml)
+      - name: Get the new version from Commitizen bump
+        run: |
+          VERSION=$(cz version)  # Get the version bumped by Commitizen
+          echo "VERSION=$VERSION" >> $GITHUB_ENV  # Set the version as an environment variable
 
       - name: Run build script
         run: bash ./build.sh
@@ -44,7 +45,7 @@ jobs:
       - name: Create GitHub release
         uses: ncipollo/release-action@v1
         with:
-          tag: v${{ env.VERSION }} # Use the version/tag from the previous step
+          tag: v${{ env.VERSION }} # Use the version/tag from Commitizen
           name: Release v${{ env.VERSION }}
           body: |
             This release contains the latest build of ShutdownX.
