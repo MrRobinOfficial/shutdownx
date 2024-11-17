@@ -1,17 +1,21 @@
 name: Build and Release
 
 on:
-  push:
-    branches:
-      - main # Trigger workflow on pushes to the main branch.
+  workflow_run:
+    workflows: ["Bump version"]
+    types:
+      - completed
 
 jobs:
-  build:
-    runs-on: windows-latest # Run the workflow on a Windows environment.
+  build_and_release:
+    runs-on: ubuntu-latest
+    needs: bump_version # Make sure this depends on the bump version workflow completing
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0 # This ensures that tags and commit history are available
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -21,16 +25,11 @@ jobs:
       - name: Install dependencies
         run: |
           pip install -r requirements.txt
-          pip install pyinstaller
           pip install commitizen
 
-      - name: Get the new version
-        run: echo "VERSION=$(cz version)" >> $GITHUB_ENV
-
-      - name: Create Git tag
-        run: |
-          git tag v${{ env.VERSION }}  # Create the Git tag using the new version
-          git push origin v${{ env.VERSION }}  # Push the tag to GitHub
+      - name: Get the new version from the bumped tag
+        run: echo "VERSION=$(git tag -l | sort -V | tail -n 1)" >> $GITHUB_ENV
+        # This will get the latest tag (the version bumped in bump.yml)
 
       - name: Run build script
         run: build.bat
@@ -44,30 +43,9 @@ jobs:
       - name: Create GitHub release
         uses: ncipollo/release-action@v1
         with:
-          tag: v${{ env.VERSION }}
+          tag: v${{ env.VERSION }} # Use the version/tag from the previous step
           name: Release v${{ env.VERSION }}
           body: |
             This release contains the latest build of ShutdownX.
             Download the `.exe` file below.
           token: ${{ secrets.GITHUB_TOKEN }} # GitHub token to create the release
-
-  release:
-    runs-on: windows-latest
-    needs: build # Ensure the release job runs only after the build job completes.
-
-    steps:
-      - name: Download artifact
-        uses: actions/download-artifact@v3
-        with:
-          name: shutdownx
-
-      - name: Create GitHub Release
-        uses: ncipollo/release-action@v1
-        with:
-          artifacts: dist/shutdownx.exe
-          tag: v${{ env.VERSION }} # Use the version from Commitizen
-          name: Release v${{ env.VERSION }}
-          body: |
-            This release contains the latest build of ShutdownX.
-            Download the `.exe` file below.
-          token: ${{ secrets.GITHUB_TOKEN }}
