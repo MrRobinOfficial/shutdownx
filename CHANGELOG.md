@@ -1,3 +1,9 @@
+## 5.0.8 (2024-11-17)
+
+### Fix
+
+- github workflow and scripts building process
+
 ## 5.0.7 (2024-11-17)
 
 ### Fix
