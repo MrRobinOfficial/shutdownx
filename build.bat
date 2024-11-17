@@ -1,1 +1,1 @@
-pyinstaller main.py --onefile -n shutdownx
+pyinstaller main.py --onefile -n shutdownx.exe
