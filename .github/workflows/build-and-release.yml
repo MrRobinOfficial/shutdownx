@@ -1,0 +1,63 @@
+name: Build and Release
+
+on:
+  push:
+    branches:
+      - main # Trigger workflow on pushes to the main branch.
+
+jobs:
+  build:
+    runs-on: windows-latest # Run the workflow on a Windows environment.
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install commitizen
+
+      - name: Run Commitizen bump
+        id: bump_version # ID to retrieve the version
+        run: cz bump --yes --files-only
+        env:
+          CZ_BUMP_TAG_FORMAT: ${{ secrets.CZ_BUMP_TAG_FORMAT }}
+
+      - name: Get the new version
+        run: echo "VERSION=$(cz version)" >> $GITHUB_ENV
+
+      - name: Run build script
+        run: build.bat
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: shutdownx
+          path: dist/shutdownx.exe # Adjust if the .exe is output elsewhere.
+
+  release:
+    runs-on: windows-latest
+    needs: build # Ensure the release job runs only after the build job completes.
+
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: shutdownx
+
+      - name: Create GitHub Release
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: dist/shutdownx.exe
+          tag: v${{ env.VERSION }} # Use the version from Commitizen
+          name: Release v${{ env.VERSION }}
+          body: |
+            This release contains the latest build of ShutdownX.
+            Download the `.exe` file below.
+          token: ${{ secrets.GITHUB_TOKEN }}
