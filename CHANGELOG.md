@@ -1,3 +1,9 @@
+## 5.0.14 (2024-11-17)
+
+### Fix
+
+- **build-and-release.yml**: fetches the tags
+
 ## 5.0.13 (2024-11-17)
 
 ### Fix
