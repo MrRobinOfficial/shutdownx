@@ -1,3 +1,9 @@
+## 5.0.6 (2024-11-17)
+
+### Fix
+
+- **build-and-release.yml**: token issues
+
 ## 5.0.5 (2024-11-17)
 
 ### Fix
