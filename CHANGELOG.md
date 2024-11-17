@@ -1,3 +1,9 @@
+## 5.0.17 (2024-11-17)
+
+### Fix
+
+- updated readme.md and removed bash file
+
 ## 5.0.16 (2024-11-17)
 
 ### Fix
