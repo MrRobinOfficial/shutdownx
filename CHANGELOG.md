@@ -1,3 +1,15 @@
+## 5.0.0 (2024-11-17)
+
+### BREAKING CHANGE
+
+- Committed by Robin Johannesson.
+
+### Fix
+
+- issues with github workflow
+- **bump.yml**: token issue
+- fixed the github workflow
+
 ## 4.0.0 (2024-11-17)
 
 ### BREAKING CHANGE
