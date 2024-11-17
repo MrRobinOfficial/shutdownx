@@ -35,13 +35,15 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: shutdownx
-          path: dist/shutdownx.exe # Adjust if the .exe is output elsewhere.
+          path: ${{ github.workspace }}/dist/shutdownx.exe # Adjust if the .exe is output elsewhere.
 
       - name: Create GitHub release
         uses: ncipollo/release-action@v1
         with:
+          tag: v${{ env.VERSION }}
+          name: Release v${{ env.VERSION }}
           body: |
             This release contains the latest build of ShutdownX.
             Download the `.exe` file below.
-          artifacts: dist/shutdownx.exe
+          artifacts: ${{ github.workspace }}/dist/shutdownx.exe
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }} # GitHub token to create the release
