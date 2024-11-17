@@ -26,7 +26,7 @@ jobs:
 
       - name: Run Commitizen bump
         id: bump_version # ID to retrieve the version
-        run: cz bump --yes --files-only
+        run: cz bump --yes --files-only --force
         env:
           CZ_BUMP_TAG_FORMAT: ${{ secrets.CZ_BUMP_TAG_FORMAT }}
 
