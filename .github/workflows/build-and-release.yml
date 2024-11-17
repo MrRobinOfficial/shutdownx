@@ -31,7 +31,7 @@ jobs:
       - name: Get the new version from Commitizen bump
         shell: pwsh
         run: |
-          $version = cz version  # Get the version bumped by Commitizen
+          $version = cz version -p  # Get the project version bumped by Commitizen
           echo "New version: $version"
           echo "VERSION=$version" >> $env:GITHUB_ENV  # Set the version as an environment variable
 
