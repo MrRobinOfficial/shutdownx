@@ -1,3 +1,7 @@
+"""
+The utils module contains utility functions for the ShutdownX CLI tool.
+"""
+
 import re
 from datetime import datetime, timedelta
 
@@ -5,7 +9,11 @@ def validate_time_format(input_time):
     """Validates the time format (HH:MM or HH:MM AM/PM)."""
     time_regex = r"^(?:[01]?\d|2[0-3]):[0-5]\d(?:\s?(AM|PM))?$"
     if not re.match(time_regex, input_time, re.IGNORECASE):
-        raise ValueError("Invalid time format. Use [i sea_green3]HH:MM[/i sea_green3] or [i light_goldenrod3]HH:MM AM/PM[/i light_goldenrod3].")
+        raise ValueError((
+            "Invalid time format."
+            "Use [i sea_green3]HH:MM[/i sea_green3] "
+            "or [i light_goldenrod3]HH:MM AM/PM[/i light_goldenrod3]."
+        ))
 
 def calculate_seconds_until(target_time):
     """Calculates seconds from now until the target time."""
@@ -23,8 +31,6 @@ def calculate_seconds_until(target_time):
         shutdown_datetime += timedelta(days=1)  # Schedule for the next day
 
     return int((shutdown_datetime - current_time).total_seconds()), shutdown_datetime
-
-import re
 
 def calculate_seconds_from_now(duration):
     """
@@ -64,5 +70,12 @@ def calculate_seconds_from_now(duration):
 
     # If none of the formats match, raise an error
     raise ValueError(
-        "Invalid duration format. Use formats like [i steel_blue3]2h 30m[/i steel_blue3], [i sea_green3]1 hours 3 minutes[/i sea_green3], [i hot_pink3]15s[/i hot_pink3], [i light_goldenrod3]01:30[/i light_goldenrod3], or [i plum3]00:03:10[/i plum3]."
+        (
+            "Invalid duration format."
+            "Use formats like [i steel_blue3]2h 30m[/i steel_blue3], "
+            "[i sea_green3]1 hours 3 minutes[/i sea_green3], "
+            "[i hot_pink3]15s[/i hot_pink3], "
+            "[i light_goldenrod3]01:30[/i light_goldenrod3], "
+            "or [i plum3]00:03:10[/i plum3]."
+        )
     )

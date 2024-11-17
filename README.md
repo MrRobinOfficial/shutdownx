@@ -42,32 +42,33 @@ git clone git@github.com:MrRobinOfficial/shutdownx.git
 cd shutdownx
 ```
 
-### 2. Building the Executable:
-You can run the `build.bat` script to build the `.exe` file from the source code. This script will create a virtual environment, install the required dependencies, and build the `.exe` file.
+### 2. Modifying the Repository:
+
+When you are working with the project, remember to run the tests:
+
+```bat
+CALL .\scripts\test.bat
+```
+
+```powershell
+& .\scripts\test.ps1
+```
+
+### 3. Building the Executable:
+
+You can run the build script to build the `.exe` file from the source code:
+
+```bat
+CALL .\scripts\build.bat
+```
+
+```powershell
+& .\scripts\build.ps1
+```
+
+This script will create a virtual environment, install the required dependencies, and build the `.exe` file.
 
 The `.exe` file will be generated in the `dist` folder.
-
-### 3. Modifying the Repository:
-
-When you are working with the project, remember to run all unit test:
-
-```bat
-echo "run tests"
-```
-
-```powershell
-echo "run tests"
-```
-
-As well, run Python inside venv:
-
-```bat
-CALL .venv/Scripts/activate.bat
-```
-
-```powershell
-& .venv/Scripts/Activate.ps1
-```
 
 ## 🔥 Usage
 

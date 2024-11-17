@@ -1,14 +1,18 @@
+"""
+The main module for the ShutdownX CLI tool.
+"""
+
 import platform
 import subprocess
 import argparse
+from datetime import datetime, timedelta
 import inquirer
 from rich.console import Console
-from datetime import datetime, timedelta
 from utils import calculate_seconds_from_now, validate_time_format, calculate_seconds_until
 
 console = Console()
 
-def handle_shutdown(seconds, preview_time):
+def handle_shutdown(seconds_time, preview_time):
     """Executes the shutdown command with a confirmation step."""
     try:
         console.print(f"[bold yellow] The computer will shut down at: {preview_time} [/bold yellow]")
@@ -17,8 +21,8 @@ def handle_shutdown(seconds, preview_time):
             default=False
         )
         if confirm:
-            subprocess.run(["shutdown", "-s", "-f", "-t", str(seconds)])
-            console.print(f"[bold green]Shutdown has now been scheduled[/bold green]")
+            subprocess.run(["shutdown", "-s", "-f", "-t", str(seconds_time)], check=True)
+            console.print("[bold green]Shutdown has now been scheduled[/bold green]")
         else:
             console.print("[bold red]Shutdown canceled.[/bold red]")
     except KeyboardInterrupt:
@@ -47,7 +51,7 @@ def interactive_mode():
                 break
 
             if mode_answer == "remove":
-                result = subprocess.run(["shutdown", "-a"], capture_output=True, text=True)
+                result = subprocess.run(["shutdown", "-a"], capture_output=True, text=True, check=True)
 
                 if result.stdout:
                     console.print("[bold green]Shutdown has been removed.[/bold green]")
@@ -65,8 +69,8 @@ def interactive_mode():
                     shutdown_time = inquirer.prompt([time_question])["time"]
                     try:
                         validate_time_format(shutdown_time)
-                        seconds, shutdown_datetime = calculate_seconds_until(shutdown_time)
-                        handle_shutdown(seconds, shutdown_datetime.strftime("%Y-%m-%d %H:%M:%S"))
+                        shutdown_seconds, shutdown_datetime_calc = calculate_seconds_until(shutdown_time)
+                        handle_shutdown(shutdown_seconds, shutdown_datetime_calc.strftime("%Y-%m-%d %H:%M:%S"))
                         return
                     except ValueError as ve:
                         console.print(f"[bold red]Error:[/bold red] {ve}")
@@ -81,9 +85,9 @@ def interactive_mode():
                     )
                     duration = inquirer.prompt([duration_question])["duration"]
                     try:
-                        seconds = calculate_seconds_from_now(duration)
-                        shutdown_datetime = datetime.now() + timedelta(seconds=seconds)
-                        handle_shutdown(seconds, shutdown_datetime.strftime("%Y-%m-%d %H:%M:%S"))
+                        shutdown_seconds = calculate_seconds_from_now(duration)
+                        shutdown_datetime_calc = datetime.now() + timedelta(seconds=shutdown_seconds)
+                        handle_shutdown(shutdown_seconds, shutdown_datetime_calc.strftime("%Y-%m-%d %H:%M:%S"))
                         return
                     except ValueError as ve:
                         console.print(f"[bold red]Error:[/bold red] {ve}")
@@ -96,7 +100,7 @@ def interactive_mode():
 if __name__ == "__main__":
     try:
         if platform.system() != "Windows":
-            raise Exception("This script is [b]ONLY[/b] supported on [i sea_green3]Windows[/i sea_green3].")
+            raise ValueError("This script is [b]ONLY[/b] supported on [i sea_green3]Windows[/i sea_green3].")
 
         # CLI Argument Parsing
         parser = argparse.ArgumentParser(description="Schedule a computer shutdown.")
