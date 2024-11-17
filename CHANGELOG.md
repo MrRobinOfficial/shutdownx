@@ -1,3 +1,9 @@
+## 5.0.11 (2024-11-17)
+
+### Fix
+
+- **build-and-release.yml**: build process issues
+
 ## 5.0.10 (2024-11-17)
 
 ### Fix
