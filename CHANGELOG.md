@@ -1,3 +1,9 @@
+## 6.0.0 (2024-11-17)
+
+### Feat
+
+- added testing and fixed project structure
+
 ## 5.0.17 (2024-11-17)
 
 ### Fix
