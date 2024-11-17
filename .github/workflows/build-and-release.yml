@@ -17,6 +17,11 @@ jobs:
           token: "${{ secrets.PERSONAL_ACCESS_TOKEN }}"
           fetch-depth: 0 # This ensures that tags and commit history are available
 
+      - name: Get the latest tag
+        run: |
+          VERSION=$(git describe --tags --abbrev=0)
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
@@ -28,7 +33,7 @@ jobs:
           pip install commitizen
           pip install pyinstaller
 
-      - name: Run build script
+      - name: Build the .exe file
         run: pyinstaller --onefile --name shutdownx --add-data "requirements.txt:." --copy-metadata readchar main.py
 
       - name: Verify .exe file exists
