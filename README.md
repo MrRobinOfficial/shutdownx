@@ -43,6 +43,8 @@ cd shutdownx
 To install the necessary Python dependencies, run:
 ```bash
 pip install -r requirements.txt
+pip install commitizen
+pip install pyinstaller
 ```
 
 ### 3. Building the Executable:
