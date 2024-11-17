@@ -1,3 +1,9 @@
+## 5.0.16 (2024-11-17)
+
+### Fix
+
+- **build-and-release.yml**: fetches the correct tag version
+
 ## 5.0.15 (2024-11-17)
 
 ### Fix
