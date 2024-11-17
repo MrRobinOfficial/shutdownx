@@ -7,19 +7,19 @@ on:
 
 jobs:
   bump_version:
-    if: "!startsWith(github.event.head_commit.message, 'bump:')"
     runs-on: ubuntu-latest
-    name: "Bump version and create changelog with commitizen"
     steps:
-      - name: Check out
+      - name: Check out repository
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
           token: "${{ secrets.GITHUB_TOKEN }}"
+
       - id: cz
         name: Create bump and changelog
         uses: commitizen-tools/commitizen-action@master
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.GH_PAT }}
+
       - name: Print Version
         run: echo "Bumped to version ${{ steps.cz.outputs.version }}"
