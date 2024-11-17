@@ -29,10 +29,11 @@ jobs:
           pip install pyinstaller
 
       - name: Get the new version from Commitizen bump
+        shell: pwsh
         run: |
-          VERSION=$(cz version)  # Get the version bumped by Commitizen
-          echo "New version: $VERSION"
-          echo "VERSION=$VERSION" >> $GITHUB_ENV  # Set the version as an environment variable
+          $version = cz version  # Get the version bumped by Commitizen
+          echo "New version: $version"
+          echo "VERSION=$version" >> $env:GITHUB_ENV  # Set the version as an environment variable
 
       - name: Build the .exe file
         run: pyinstaller --onefile --name shutdownx --add-data "requirements.txt:." --copy-metadata readchar main.py
