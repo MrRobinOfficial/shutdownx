@@ -1,3 +1,9 @@
+## 5.0.12 (2024-11-17)
+
+### Fix
+
+- **build-and-release.yml**: change to using windows env
+
 ## 5.0.11 (2024-11-17)
 
 ### Fix
