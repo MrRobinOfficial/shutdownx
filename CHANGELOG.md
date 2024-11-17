@@ -1,3 +1,9 @@
+## 5.0.2 (2024-11-17)
+
+### Fix
+
+- added build.sh and updated the dependencies list
+
 ## 5.0.1 (2024-11-17)
 
 ### Fix
