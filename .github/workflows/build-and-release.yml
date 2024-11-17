@@ -25,13 +25,14 @@ jobs:
         run: |
           pip install -r requirements.txt
           pip install commitizen
+          pip install pyinstaller
 
       - name: Get the new version from the bumped tag
         run: echo "VERSION=$(git tag -l | sort -V | tail -n 1)" >> $GITHUB_ENV
         # This will get the latest tag (the version bumped in bump.yml)
 
       - name: Run build script
-        run: build.bat
+        run: build.sh
 
       - name: Upload artifact
         uses: actions/upload-artifact@v3
