@@ -4,6 +4,7 @@
   
 [![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/mrrobinofficial/shutdownx/blob/HEAD/LICENSE.txt)
 ![Build Status](https://github.com/mrrobinofficial/shutdownx/actions/workflows/build-and-release.yml/badge.svg)
+![Testing Status](https://github.com/mrrobinofficial/shutdownx/actions/workflows/testing.yml/badge.svg)
 
 _A simple interactive cli tool for scheduling a shutdown on Windows_ 
 
@@ -27,7 +28,6 @@ ShutdownX is a Windows tool that allows you to schedule automatic shutdowns usin
 You can install ShutdownX using one of the following methods:
 
 - **Release**: Download the pre-built `.exe` file from the [Releases](https://github.com/MrRobinOfficial/shutdownx/releases) section.
-- **Build manually**: You can run the `build.bat` script to build the `.exe` file from the source code.
 - **Manual Installation**: Follow the instructions in the [Manual Installation](#manual-installation) section.
 
 > [!TIP]
@@ -42,18 +42,32 @@ git clone git@github.com:MrRobinOfficial/shutdownx.git
 cd shutdownx
 ```
 
-### 2. Install dependencies:
-To install the necessary Python dependencies, run:
-```bash
-pip install -r requirements.txt
-pip install commitizen
-pip install pyinstaller
-```
-
-### 3. Building the Executable:
-To build the `.exe` file from the source, use the `build.bat` script. This will package the Python script into a standalone Windows executable using **PyInstaller**.
+### 2. Building the Executable:
+You can run the `build.bat` script to build the `.exe` file from the source code. This script will create a virtual environment, install the required dependencies, and build the `.exe` file.
 
 The `.exe` file will be generated in the `dist` folder.
+
+### 3. Modifying the Repository:
+
+When you are working with the project, remember to run all unit test:
+
+```bat
+echo "run tests"
+```
+
+```powershell
+echo "run tests"
+```
+
+As well, run Python inside venv:
+
+```bat
+CALL .venv/Scripts/activate.bat
+```
+
+```powershell
+& .venv/Scripts/Activate.ps1
+```
 
 ## 🔥 Usage
 
