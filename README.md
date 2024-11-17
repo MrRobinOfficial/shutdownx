@@ -17,14 +17,17 @@ ShutdownX is a Windows tool that allows you to schedule automatic shutdowns usin
 - **Windows OS**: ShutdownX is designed to work on Windows.
 
 ## 🛠️ Dependencies
-- **PyInstaller**: Used to package the Python script as a standalone `.exe` file.
-- **Commitizen**: Automates version bumping and changelog updates based on conventional commit messages.
+- [inquirer](https://pypi.org/project/inquirer/): Used for interactive prompts.
+- [rich console](https://rich.readthedocs.io/en/latest/console.html): Used for enhanced console output.
+- [PyInstaller](https://pyinstaller.org/en/stable/): Used to package the Python script as a standalone `.exe` file.
+- [Commitizen](https://github.com/commitizen/cz-cli): Automates version bumping and changelog updates based on conventional commit messages.
 
 ## 🚀 Installation
 
 You can install ShutdownX using one of the following methods:
 
 - **Release**: Download the pre-built `.exe` file from the [Releases](https://github.com/MrRobinOfficial/shutdownx/releases) section.
+- **Build manually**: You can run the `build.bat` script to build the `.exe` file from the source code.
 - **Manual Installation**: Follow the instructions in the [Manual Installation](#manual-installation) section.
 
 > [!TIP]
