@@ -38,12 +38,12 @@ jobs:
           pip install -r requirements.txt
           pip install commitizen
 
-      - name: Get the new version from Commitizen bump
-        shell: pwsh
-        run: |
-          $version = cz version -p  # Get the project version bumped by Commitizen
-          echo "New version: $version"
-          echo "VERSION=$version" >> $env:GITHUB_ENV  # Set the version as an environment variable
+      # - name: Get the new version from Commitizen bump
+      #   shell: pwsh
+      #   run: |
+      #     $version = cz version -p  # Get the project version bumped by Commitizen
+      #     echo "New version: $version"
+      #     echo "VERSION=$version" >> $env:GITHUB_ENV  # Set the version as an environment variable
 
       - name: Build the .exe file
         run: pyinstaller --onefile --clean --name shutdownx --icon=img/icon.ico --add-data "requirements.txt:." --copy-metadata readchar src/main.py
