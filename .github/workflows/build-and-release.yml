@@ -9,10 +9,14 @@ jobs:
     uses: ./.github/workflows/testing.yml
 
   bump-version:
+    permissions:
+      contents: write
     uses: ./.github/workflows/bumpversion.yml
     needs: build-test
 
   build-and-release:
+    permissions:
+      contents: write
     runs-on: windows-latest
     needs: [build-test, bump-version]
 
