@@ -19,7 +19,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
-          token: "${{ secrets.PERSONAL_ACCESS_TOKEN }}"
+          token: "${{ secrets.GITHUB_TOKEN }}"
           fetch-depth: 0 # This ensures that tags and commit history are available
 
       - name: Set up Python
@@ -62,4 +62,4 @@ jobs:
             This release contains the latest build of ShutdownX.
             Download the `.exe` file below.
           artifacts: ${{ github.workspace }}/dist/shutdownx.exe
-          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }} # GitHub token to create the release
+          token: ${{ secrets.GITHUB_TOKEN }} # GitHub token to create the release
