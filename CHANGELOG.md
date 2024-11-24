@@ -1,3 +1,19 @@
+## 6.1.0 (2024-11-24)
+
+### Fix
+
+- updated github workflows
+
+## 6.0.2 (2024-11-17)
+
+### Feat
+
+- general improvements and fixes
+
+### Fix
+
+- added gif showcase and fixed main.py file
+
 ## 6.0.1 (2024-11-17)
 
 ### Fix
