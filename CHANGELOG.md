@@ -1,3 +1,12 @@
+## 6.1.1 (2024-11-24)
+
+### Fix
+
+- issues with github workflow
+- issues with github workflow
+- issues with github workflow
+- issues with github workflow
+
 ## 6.1.0 (2024-11-24)
 
 ### Fix
