@@ -10,6 +10,7 @@ jobs:
 
   bump-version:
     uses: ./.github/workflows/bumpversion.yml
+    needs: build-test
 
   build-and-release:
     runs-on: windows-latest
