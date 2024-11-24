@@ -5,11 +5,6 @@ on:
   workflow_call:
     inputs: {} # Define inputs if needed for reusable workflows
 
-  # Trigger on push to the main branch
-  push:
-    branches:
-      - main
-
   # Trigger on pull requests targeting the main branch
   pull_request:
     branches:

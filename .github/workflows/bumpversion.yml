@@ -5,10 +5,6 @@ on:
   workflow_call:
     inputs: {} # Define inputs if needed for reusable workflows
 
-  push:
-    branches:
-      - main
-
 jobs:
   bump-version:
     if: "!startsWith(github.event.head_commit.message, 'bump:')"
