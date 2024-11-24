@@ -1,14 +1,19 @@
 name: Build and Release
 
 on:
-  workflow_run:
-    workflows: ["Bump version"]
-    types:
-      - completed
+  push:
+    branches: ["main"]
 
 jobs:
-  build_and_release:
+  build-test:
+    uses: ./.github/workflows/testing.yml
+
+  bump-version:
+    uses: ./.github/workflows/bumpversion.yml
+
+  build-and-release:
     runs-on: windows-latest
+    needs: [build-test, bump-version]
 
     steps:
       - name: Checkout repository

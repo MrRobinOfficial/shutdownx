@@ -1,9 +1,3 @@
-## 6.0.2 (2024-11-17)
-
-### Fix
-
-- added gif showcase and fixed main.py file
-
 ## 6.0.1 (2024-11-17)
 
 ### Fix

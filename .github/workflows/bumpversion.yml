@@ -1,6 +1,10 @@
 name: Bump version
 
 on:
+  # Allow this workflow to be reusable by other workflows
+  workflow_call:
+    inputs: {} # Define inputs if needed for reusable workflows
+
   push:
     branches:
       - main
