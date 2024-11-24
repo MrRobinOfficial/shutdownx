@@ -1,10 +1,19 @@
 name: Run Tests
 
 on:
-  workflow_run:
-    workflows: ["Build and Release"]
-    types:
-      - completed
+  # Allow this workflow to be reusable by other workflows
+  workflow_call:
+    inputs: {} # Define inputs if needed for reusable workflows
+
+  # Trigger on push to the main branch
+  push:
+    branches:
+      - main
+
+  # Trigger on pull requests targeting the main branch
+  pull_request:
+    branches:
+      - main
 
 jobs:
   test:
