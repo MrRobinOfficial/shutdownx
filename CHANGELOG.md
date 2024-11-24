@@ -1,3 +1,9 @@
+## 6.1.2 (2024-11-25)
+
+### Fix
+
+- wrong tag for github workflow
+
 ## 6.1.1 (2024-11-24)
 
 ### Fix
